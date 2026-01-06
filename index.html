@@ -32,9 +32,9 @@
         </ul>
     </div>
     <main class="main-wrapper">
-        <div class="top-wapper">
+        <div class="top-wrapper">
             <div class="container">
-                <h1 id="view-title">2026年!残り一年謳歌しよう!</h1>
+                <h1 id="view-title">2026年!残り一年を謳歌しよう!</h1>
                 <p>Webアプリ開発練習</p>
                 <div class="btn-wrapper">
                     <a href="#" class="icon-btn X"><span class="fa fa-twitter"></span>Xアカウント</a>
@@ -44,15 +44,31 @@
         </div>
 
         <div class="container app-content">
-            <section id="top-page">
-                <div class="menu-grid">
-                    <li><a href=# onclick="switchView('top')">top</a></li>
-                    <li><a href=# onclick="switchView('counter')">Counter</a></li>
-                    <li><a href=# onclick="switchView('todo')">ToDo</a></li>
+            <section id="top-view" class="view active">
+                <div class="up">
+                    <div class="up-header">
+                        <h1>About</h1>
+                        <span class="slash">/</span>
+                        <h2>作ったアプリ一覧</h2>
+                    </div>
+                    <p>説明</p>
                 </div>
-                <div id="up">
-                    <h2>トップページ</h2>
-                    <h2>このアプリの説明</h2>
+                <div class="menu-grid">
+                    <div class="menu-item" onclick="switchView('counter')">
+                        <span class="fa fa-calculator"></span>
+                        <h3>Counter</h3>
+                        <p>訪問回数をカウントします</p>
+                    </div>
+                    <div class="menu-item" onclick="switchView('todo')">
+                        <span class="fa fa-check-square-o"></span>
+                        <h3>ToDo List</h3>
+                        <p>タスク管理</p>
+                    </div>
+                    <div class="menu-item" onclick="switchView('top')">
+                        <span class="fa fa-calculator"></span>
+                        <h3>Home</h3>
+                        <p>ようこそ！</p>
+                    </div>
                 </div>
             </section>
             <section id="counter-view" class="view active">

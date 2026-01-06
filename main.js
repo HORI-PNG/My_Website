@@ -137,6 +137,7 @@ function saveTodos() {
 
 function switchView(viewName) {
     // すべてのビューから active クラスを外す
+    document.getElementById('top-view').classList.remove('active');
     document.getElementById('counter-view').classList.remove('active');
     document.getElementById('todo-view').classList.remove('active');
     // 指定されたビューに active クラスをつける
@@ -148,3 +149,10 @@ function switchView(viewName) {
     // サイドメニューが開いていたら閉じる
     sideMenu.classList.remove('active');
 }
+
+// main.js の一番最後に追記
+updateDisplay();
+renderLogs();
+
+// 立ち上げ時にトップ画面を表示する
+switchView('top');

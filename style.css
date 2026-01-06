@@ -123,7 +123,8 @@ header {
 
 .top-wrapper {
     padding: 100px 0 60px 0;
-    background-image: url('画像のurl');
+    background-image: url('https://raw.githubusercontent.com/HORI-PNG/My_Website/main/top_img.png');
+    opacity: 0.8;
     background-size: cover;
     color: white;
     text-align: center;
@@ -131,12 +132,22 @@ header {
 }
 
 .X {
-    background-color: rgb(26, 30, 32);
+    background-color: rgb(94, 157, 186);
     margin-right: 10px; 
 }
 
+.X:hover {
+    background-color: rgb(0, 86, 179);
+    opacity: 1;
+}
+
 .github {
-    background: rgb(34, 37, 40);
+    background: rgb(48, 66, 84);
+}
+
+.github:hover {
+    background-color: rgb(18, 31, 56);
+    opacity: 1;
 }
 
 .fa {
@@ -164,6 +175,97 @@ header {
 
 .view.active {
     display: block; /* activeクラスがついたものだけ表示 */
+}
+
+/* --------------topページ------------- */
+.up {
+    padding: 60px 0;
+    text-align: left; /* 左寄せにする */
+}
+
+.up-header {
+    display: flex;
+    align-items: baseline; /* 文字の下端で揃える */
+    gap: 15px;             /* 要素間の隙間 */
+    margin-bottom: 20px;
+}
+
+.up-header h1 {
+    font-size: 80px;
+    color: rgb(0, 134, 209);
+    font-weight: bold;
+    margin: 0;
+    letter-spacing: 2px;
+}
+
+.up-header .slash {
+    font-size: 40px;
+    color: rgb(0, 134, 209);
+    font-weight: 300;
+}
+
+.up-header h2 {
+    font-size: 30px;
+    color: rgb(0, 134, 209);
+    font-weight: bold;
+    margin: 0;
+}
+
+.up p {
+    font-size: 24px;
+    color: #333;           /* 説明文の色 */
+    line-height: 1.8;      /* 行間を広くして読みやすく */
+    max-width: 800px;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px; /* タイル間の隙間 */
+    padding: 20px;
+}
+
+.menu-item {
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* 軽い影をつける */
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s; /* 動きを滑らかにする */
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.menu-item::before {
+    content: "";         /* 必須：中身は空っぽでOK */
+    position: absolute;  /* タイル内の絶対位置に配置 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('top_img.png'); 
+    background-size: cover;
+    background-position: center;
+    opacity: 0.3;
+    z-index: -1;
+}
+
+.menu-item:hover {
+    transform: translateY(-1px); /* 少し上に浮き上がらせる */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.menu-item .fa {
+    font-size: 40px;
+    color: #ff9800;
+    margin-bottom: 15px;
+}
+
+.menu-item h3 {
+    margin: 10px 0;
+    color: #333;
 }
 
 /* -------------共通のコンテンツカード------------- */
