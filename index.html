@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Counter</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-left">
+                <span class="fa fa-home"></span>
+                <nav class="logo-txt">2026 良い一年にしよう！</nav>
+            </div>
+            <div class="header-right">
+                <a href="#" class="login">ログイン</a>
+                <div class="menu-icon" id="menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="side-menu" id="side-menu">
+        <ul>
+            <li><a href="javascript:void(0)" onclick="switchView('top')">Top Page</a></li>
+            <li><a href="javascript:void(0)" onclick="switchView('counter')">Counter</a></li>
+            <li><a href="javascript:void(0)" onclick="switchView('todo')">ToDo List</a></li>
+        </ul>
+    </div>
+    <main class="main-wrapper">
+        <div class="top-wapper">
+            <div class="container">
+                <h1 id="view-title">2026年!残り一年謳歌しよう!</h1>
+                <p>Webアプリ開発練習</p>
+                <div class="btn-wrapper">
+                    <a href="#" class="icon-btn X"><span class="fa fa-twitter"></span>Xアカウント</a>
+                    <a href="#" class="icon-btn github"><span class="fa fa-github"></span>HORI-PNG</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container app-content">
+            <section id="top-page">
+                <div class="menu-grid">
+                    <li><a href=# onclick="switchView('top')">top</a></li>
+                    <li><a href=# onclick="switchView('counter')">Counter</a></li>
+                    <li><a href=# onclick="switchView('todo')">ToDo</a></li>
+                </div>
+                <div id="up">
+                    <h2>トップページ</h2>
+                    <h2>このアプリの説明</h2>
+                </div>
+            </section>
+            <section id="counter-view" class="view active">
+                <div class="app-card">
+                    <h2>訪問者カウンター</h2>
+                    <div id="display">0</div>
+                    <div id="log-container">
+                        <h3>訪問ログ</h3>
+                        <ul id="log-list"></ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="todo-view" class="view">
+                <div class="app-card">
+                    <div class="todo-control">
+                        <h3>新しいタスク</h3>
+                        <div class="todo-input-group">
+                            <input type="text" id="todo-input" placeholder="タスクを入力...">
+                            <button id="todo-add-btn" class="add-btn">追加</button>
+                        </div>
+                        <p class="txt-contents">タスクを追加すると左側にリストアップされます。</p>
+                    </div>
+                    
+                    <div class="todo-list-wrapper">
+                        <h3>Checklist</h3>
+                        <ul id="todo-list"></ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 My Website</p>
+        </div>
+    </footer>
+    <script src="main.js"></script>
+</body>
+</html>

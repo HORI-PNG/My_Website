@@ -1,0 +1,331 @@
+/* idは先頭に'#' →セレクタという*/
+body {
+    padding-top: 65px; /* header分の余白を上にあける */
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(244, 247, 248);
+    font-family: "Hiragino Kaku Gothic ProN", sans-serif;
+    margin: 0; /* bodyがもともと持っている余計な余白をなくす */
+    min-height: 100vh;
+    overflow-x: hidden; /* サイドメニューによる横スクロールを防止 */
+}
+
+.container {
+    width: 100%;
+    max-width: 1170px; /* コンテンツの最大横幅 */
+    margin: 0 auto;
+    padding: 0 15px;
+    box-sizing: border-box;
+}
+
+/* -----------ヘッダー部分------------- */
+
+header {
+    height: 65px;
+    width: 100%;
+    background-color: rgba(34, 49, 52, 0.9);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10; /* 他の要素より手前に表示 */
+}
+
+.header-left {
+    float: left; /* 左側に寄せる設定 */
+    display: flex; /* ★横並びモードをオンにする */
+    align-items: center; /* ★中のアイコンと文字を上下中央で揃える */
+    height: 65px; /* ヘッダーの高さに合わせる */
+}
+
+.logo-txt {
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    margin-left: 10px;
+}
+
+.header-left .fa {
+    color: white;        /* ★色を白にする */
+    font-size: 24px;     /* サイズもここで調整できます */
+    margin-right: 5px;   /* 文字との間の余白 */
+}
+
+.header-right {
+    float: right;
+    display: flex;
+    align-items: center;
+    height: 65px;
+    padding-right: 20px;
+}
+
+.header-right .login {
+    display: flex;           /* 中の文字を自由に配置できるようにする */
+    align-items: center;     /* 文字を上下の中央に配置する */
+    justify-content: center; /* 文字を左右の中央に配置する */
+    height: 100%;            /* ヘッダーの高さ(65px)いっぱいまで広げる */
+    padding: 0 10px;         /* 左右にだけ余白を作る（上下は不要） */
+    background-color: #ff9800; /* Skyのような目立つオレンジ色にする */
+    color: white;            /* 文字色を白にする */
+    text-decoration: none;   /* 下線を消す */
+    font-weight: bold;       /* 文字を太くする */
+}
+/* ------------ヘッダー部分ここまで------------- */
+/* ------------サイドメニュー----------------*/
+
+.menu-icon {
+    display: flex;
+    flex-direction: column; /* 中にある部品（数字やボタン）を縦に並べる */
+    justify-content: space-between; /* 上下の間隔を均等にする */
+    padding-left: 30px;
+    width: 30px;
+    height: 20px;
+}
+
+.menu-icon span {
+    display: block; /* 要素を「ブロックレベル要素」として扱う */
+    height: 3px;
+    width: 100%;
+    background-color: white; /* 白の線 */
+    border-radius: 2px;
+}
+
+.side-menu {
+    position: fixed; /* 画面に固定 */
+    top: 65px; /* headerの下に配置 */
+    right: -300px; /* 画面外に隠す */
+    width: 250px; /* メニューの幅 */
+    height: 100%; /* 画面の高さいっぱいにする */
+    background: rgb(20, 26, 37);
+    transition: all 0.5s; /* アニメーションの時間を設定 */
+    padding: 20px; /* 内側の余白を設定 */
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1); /* 影をつける */
+    z-index: 9;
+}
+
+.side-menu.active {
+    right: 0; /* 画面内に表示 */
+}
+
+.side-menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.side-menu a {
+    color: white;
+    text-decoration: none; /* 下線を消す */
+    display: block; /* ブロック要素にする */
+    padding: 10px 0; /* 上下の余白を設定 */
+}
+
+/* --------------サイドメニューここまで-------------- */
+/* --------------トップ------------- */
+
+.top-wrapper {
+    padding: 100px 0 60px 0;
+    background-image: url('画像のurl');
+    background-size: cover;
+    color: white;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.X {
+    background-color: rgb(26, 30, 32);
+    margin-right: 10px; 
+}
+
+.github {
+    background: rgb(34, 37, 40);
+}
+
+.fa {
+    margin-right: 8px;
+}
+
+.icon-btn {
+    padding: 8px 24px;
+    color: white;
+    display: inline-block;
+    opacity: 0.8;
+    border-radius: 4px;
+}
+
+.menu-grid {
+    position: relative;
+    display: grid;
+    flex-wrap: wrap;
+}
+
+/* --------------ビューの切り替え制御---------------- */
+.view {
+    display: none; /* 基本は非表示 */
+}
+
+.view.active {
+    display: block; /* activeクラスがついたものだけ表示 */
+}
+
+/* -------------共通のコンテンツカード------------- */
+
+.app-card {
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin: 0 auto 40px;
+    max-width: 800px;
+}
+
+/* ----------------訪問カウンター------------ */
+
+#display {
+    font-size: 100px;
+    font-weight: bold;
+    color: rgb(215, 229, 146);
+    margin: 20px auto;
+    width: 100%;
+    text-align: center;
+}
+
+#button {
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* ボタン同士の間隔をあける */
+    margin-bottom: 30px;
+}
+
+#log-container {
+    margin-top: 30px;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto; /* 縦方向に内容がはみ出したらスクロールバーを表示 */
+    background-color: rgb(232, 242, 225);
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#log-list {
+    list-style: none; /* リストの点を消す */
+    padding: 0; /* ul要素の余計な余白をなくす */
+    font-size: 14px;
+}
+
+#log-list li {
+    border-bottom: 1px solid #eee;
+    padding: 5px 0;
+}
+
+/* ----------ToDoリスト------------- */
+
+#todo-view .app-card {
+    display: flex; /* フレックスボックスを使用 */
+    flex-direction: row-reverse; /* 右に入力、左にリスト */
+    gap: 30px;
+    text-align: left;
+}
+
+/* 右側：入力エリア */
+.todo-control {
+    flex: 1;
+    border-left: 1px solid rgb(238, 238, 238);
+    padding-left: 20px;
+}
+
+.todo-input-group {
+    display: flex; /* 横並びにする */
+    gap: 10px; /* 要素間の隙間を設定 */
+    margin-bottom: 20px; /* 下に余白を設定 */
+}
+
+#todo-input {
+    flex: 1; /* 入力欄を可能な限り広げる */
+    padding: 10px; /* 内側の余白を設定 */
+    font-size: 16px; /* フォントサイズを設定 */
+    border: 1px solid rgb(204, 204, 204); /* 薄い灰色の枠線を設定 */
+    border-radius: 5px; /* 角を丸くする */
+}
+
+/* 左側：リストエリア（空いているスペース） */
+#todo-list {
+    flex: 2;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+#todo-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgb(236, 233, 244);
+    border: 1px solid rgb(221, 221, 221);
+    margin-bottom: 8px;
+    padding: 12px;
+    border-radius: 4px;
+}
+
+#todo-list li {
+    display: flex; /* 横並びにする */
+    justify-content: space-between; /* 左右に要素を配置 */
+    align-items: center;
+    padding: 12px; /* 内側の余白を設定 */
+    background: rgb(236, 233, 244);
+    margin-bottom: 5px; /* 下に余白を設定 */
+    border-radius: 5px; /* 角を丸くする */
+    border: 1px solid rgb(221, 221, 221);
+}
+
+/* ------------共通パーツ-------------- */
+/* classは先頭に'.' →クラスセレクタという*/
+.add-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: rgb(0, 123, 255);
+    color: rgb(255, 255, 255);
+    /* ボタンには黒い枠線がもともとついてる */
+    border: none;
+    /* ボタンの角を丸くする */
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* ボタンにマウスを乗せたとき */
+.btn:hover {
+    background-color: rgb(0, 86, 179);
+    opacity: 1;
+}
+
+.delete-btn {
+    background: rgb(231, 76, 60); /* 赤色の背景 */
+    color: rgb(255, 255, 255); /* 文字色を白に */
+    border: none; /* 枠線を消す */
+    padding: 5px 10px; /* 内側の余白を設定 */
+    border-radius: 3px; /* 角を丸くする */
+    cursor: pointer; /* カーソルをポインターに変更 */
+}
+
+/* --------------フッター----------------- */
+
+footer {
+    margin-top: auto;
+    background: rgb(238, 238, 238);
+    padding: 40px 10px;
+    color: rgb(127, 140, 141);
+    text-align: center;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    max-width: 1170px;
+}
+
+.footer-section h4 {
+    margin-bottom: 10px;
+    color: rgb(51, 51, 51);
+}
