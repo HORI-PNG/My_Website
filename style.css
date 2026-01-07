@@ -150,8 +150,17 @@ header {
     opacity: 1;
 }
 
+.instagram {
+    background-color: rgb(210, 112, 230);
+}
+
+.instagram:hover {
+    background-color: rgb(194, 40, 224);
+    opacity: 1;
+}
+
 .fa {
-    margin-right: 8px;
+    margin-right: 10px;
 }
 
 .icon-btn {
@@ -188,6 +197,7 @@ header {
     align-items: baseline; /* 文字の下端で揃える */
     gap: 15px;             /* 要素間の隙間 */
     margin-bottom: 20px;
+    border-bottom: 2px solid rgb(0, 134, 209);
 }
 
 .up-header h1 {
