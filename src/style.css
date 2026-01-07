@@ -23,7 +23,7 @@ body {
 header {
     height: 65px;
     width: 100%;
-    background-color: rgba(34, 49, 52, 0.9);
+    background-color: rgba(2, 55, 59, 0.9);
     position: fixed;
     top: 0;
     left: 0;
@@ -32,9 +32,10 @@ header {
 
 .header-left {
     float: left; /* 左側に寄せる設定 */
-    display: flex; /* ★横並びモードをオンにする */
-    align-items: center; /* ★中のアイコンと文字を上下中央で揃える */
+    display: flex; /* 横並びモードをオンにする */
+    align-items: center; /* 中のアイコンと文字を上下中央で揃える */
     height: 65px; /* ヘッダーの高さに合わせる */
+    cursor: pointer;
 }
 
 .logo-txt {
@@ -45,9 +46,9 @@ header {
 }
 
 .header-left .fa {
-    color: white;        /* ★色を白にする */
-    font-size: 24px;     /* サイズもここで調整できます */
-    margin-right: 5px;   /* 文字との間の余白 */
+    color: white;
+    font-size: 24px;
+    margin-right: 5px;
 }
 
 .header-right {
@@ -79,6 +80,7 @@ header {
     padding-left: 30px;
     width: 30px;
     height: 20px;
+    cursor: pointer;
 }
 
 .menu-icon span {
@@ -122,13 +124,33 @@ header {
 /* --------------トップ------------- */
 
 .top-wrapper {
-    padding: 100px 0 60px 0;
-    background-image: url('https://raw.githubusercontent.com/HORI-PNG/My_Website/main/top_img.png');
-    opacity: 0.8;
-    background-size: cover;
+    padding: 150px 0 100px 0;
+    position: relative;        /* 疑似要素の基準にするために必須 */
     color: white;
     text-align: center;
-    margin-bottom: 40px;
+    background-color: rgb(161, 197, 218);  /* 画像の隙間から見える色 */
+    overflow: hidden;         /* 画像がはみ出さないようにする */
+}
+
+/* 背景画像専用の層を作る */
+.top-wrapper::before {
+    content: "";               /* 必須設定 */
+    position: absolute;        /* 親要素に対して絶対配置 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://raw.githubusercontent.com/HORI-PNG/My_Website/main/top_img.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.5;
+    z-index: 0;
+}
+
+.top-wrapper .container {
+    position: relative;        /* z-indexを効かせるために必要 */
+    z-index: 1;                /* 画像(0)より手前(1)にする */
+    margin-bottom: 50px;
 }
 
 .X {
@@ -255,11 +277,50 @@ header {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('top_img.png'); 
     background-size: cover;
     background-position: center;
     opacity: 0.3;
     z-index: -1;
+}
+
+.item-counter::before {
+    background-image: url('https://raw.githubusercontent.com/HORI-PNG/My_Website/main/top_img.png'); 
+}
+
+.item-todo::before {
+    background-image: url('https://raw.githubusercontent.com/HORI-PNG/My_Website/main/top_img.png'); 
+}
+
+.item-home::before {
+    background-image: url('https://raw.githubusercontent.com/HORI-PNG/My_Website/main/top_img.png'); 
+}
+
+.moodle::before {
+    background-image: url('https://raw.githubusercontent.com/HORI-PNG/My_Website/main/top_img.png'); 
+}
+
+.LiveCampus::before {
+    background-image: url('https://raw.githubusercontent.com/HORI-PNG/My_Website/main/top_img.png'); 
+}
+
+.KIT-HomePage::before {
+    background-image: url('https://raw.githubusercontent.com/HORI-PNG/My_Website/main/top_img.png'); 
+}
+
+.chatGPT::before {
+    background-image: url('https://raw.githubusercontent.com/HORI-PNG/My_Website/main/top_img.png'); 
+}
+
+.Gemini::before {
+    background-image: url('https://raw.githubusercontent.com/HORI-PNG/My_Website/main/top_img.png'); 
+}
+
+.Copilot::before {
+    background-image: url('https://raw.githubusercontent.com/HORI-PNG/My_Website/main/top_img.png'); 
+}
+
+.Perplexity::before {
+    background-image: url('https://raw.githubusercontent.com/HORI-PNG/My_Website/main/top_img.png'); 
 }
 
 .menu-item:hover {
@@ -276,6 +337,11 @@ header {
 .menu-item h3 {
     margin: 10px 0;
     color: #333;
+}
+
+.usual-content-campus {
+    background-color:rgb(206, 229, 242);
+    width: 100%;
 }
 
 /* -------------共通のコンテンツカード------------- */
@@ -333,16 +399,15 @@ header {
 
 #todo-view .app-card {
     display: flex; /* フレックスボックスを使用 */
-    flex-direction: row-reverse; /* 右に入力、左にリスト */
-    gap: 30px;
+    flex-direction: column;
+    gap: 10px;
     text-align: left;
 }
 
-/* 右側：入力エリア */
 .todo-control {
-    flex: 1;
-    border-left: 1px solid rgb(238, 238, 238);
-    padding-left: 20px;
+    width: 100%;
+    border-bottom: 2px solid rgb(238, 238, 238);
+    padding-bottom: 10px;
 }
 
 .todo-input-group {
@@ -359,9 +424,8 @@ header {
     border-radius: 5px; /* 角を丸くする */
 }
 
-/* 左側：リストエリア（空いているスペース） */
+/* リストエリア */
 #todo-list {
-    flex: 2;
     list-style: none;
     padding: 0;
     margin: 0;

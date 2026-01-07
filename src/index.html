@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Counter</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-left" onclick="switchView('top')">
+                <span class="fa fa-home"></span>
+                <nav class="logo-txt">2026 良い一年にしよう！</nav>
+            </div>
+            <div class="header-right">
+                <a href="#" class="login">ログイン</a>
+                <div class="menu-icon" id="menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="side-menu" id="side-menu">
+        <ul>
+            <li><a href="javascript:void(0)" onclick="switchView('top')">Top Page</a></li>
+            <li><a href="javascript:void(0)" onclick="switchView('counter')">Counter</a></li>
+            <li><a href="javascript:void(0)" onclick="switchView('todo')">ToDo List</a></li>
+        </ul>
+    </div>
+    <main class="main-wrapper">
+        <section id="top-view" class="view active">
+            <div class="top-wrapper">
+                <div class="container">
+                    <h1 id="view-title">26年!残り一年を謳歌しよう!</h1>
+                    <p>Webアプリ開発練習</p>
+                    <div class="btn-wrapper">
+                        <a href="#" class="icon-btn X"><span class="fa fa-twitter"></span>Xアカウント</a>
+                        <a href="https://github.com/HORI-PNG" target="_blank" rel="noopener noreferrer" class="icon-btn github"><span class="fa fa-github"></span>HORI-PNG</a>
+                        <a href="#" class="icon-btn instagram"><span class="fa fa-instagram">horiyu90</span></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container app-content">
+                <div class="up">
+                    <div class="up-header">
+                        <h1>About</h1>
+                        <span class="slash">/</span>
+                        <h2>作ったアプリ一覧</h2>
+                    </div>
+                    <p>説明</p>
+                </div>
+                <div class="menu-grid">
+                    <div class="menu-item item-counter" onclick="switchView('counter')">
+                        <span class="fa fa-calculator"></span>
+                        <h3>Counter</h3>
+                        <p>訪問回数をカウントします</p>
+                    </div>
+                    <div class="menu-item item-todo" onclick="switchView('todo')">
+                        <span class="fa fa-check-square-o"></span>
+                        <h3>ToDo List</h3>
+                        <p>タスク管理</p>
+                    </div>
+                    <div class="menu-item item-home" onclick="switchView('top')">
+                        <span class="fa fa-home"></span>
+                        <h3>Home</h3>
+                        <p>ようこそ！</p>
+                    </div>
+                </div>
+            </div>
+            <div class="usual-content-campus">
+                <div class="container">
+                    <div class="up">
+                        <div class="up-header">
+                            <h1>Campus</h1>
+                            <span class="slash">/</span>
+                            <h2>普段大学で使うサイト</h2>
+                        </div>
+                        <p>説明</p>
+                    </div>
+                    <div class="menu-grid">
+                        <div class="menu-item moodle" href="https://ict-i.el.kyutech.ac.jp/my/">
+                            <span class="moodle-icon"></span>
+                            <h3>moodle</h3>
+                            <p>学習支援システム</p>
+                        </div>
+                        <div class="menu-item LiveCampus" href="https://virginia.jimu.kyutech.ac.jp/lcu-web/">
+                            <span lass="LiveCampus-icon"></span>
+                            <h3>LiveCampus</h3>
+                            <p>学習支援システム</p>
+                        </div>
+                        <div class="menu-item KIT-HomePage" href="https://www.iizuka.kyutech.ac.jp/faculty/educational-info">
+                            <span class="KIT-HomePage-icon"></span>
+                            <h3>KITホームページ</h3>
+                            <p>ホームページ</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="usual-AI">
+                <div class="container">
+                    <div class="up">
+                        <div class="up-header">
+                            <h1>AI<h1>
+                            <span class="slash">/</span>
+                            <h2>愛用の生成系AIたち</h2>
+                        </div>
+                        <p>説明</p>
+                    </div>
+                    <div class="menu-grid usual-content-AI">
+                        <div class="menu-item chatGPT" href="https://chatgpt.com/">
+                            <span class="chatGPT-icon"></span>
+                            <h3>chatGPT</h3>
+                            <p>何でも屋</p>
+                        </div>
+                        <div class="menu-item Gemini" href="https://gemini.google.com/app?hl=ja">
+                            <span class="Gemini"></span>
+                            <h3>Gemini</h3>
+                            <p>Google製品andPro機能</p>
+                        </div>
+                        <div class="menu-item Copilot" href="https://copilot.cloud.microsoft/?fromCode=wpwav2&redirectId=189350FEAAE14A12A7CD986B3D8FDB2F&auth=2">
+                            <span class="Copilot-icon"></span>
+                            <h3>Copilot</h3>
+                            <p>Microsoft製品</p>
+                        </div>
+                        <div class="menu-item Perplexity" href="https://www.perplexity.ai/">
+                            <span class="Perplexity"></span>
+                            <h3>Perplexity</h3>
+                            <p>高速Web検索</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="counter-view" class="view">
+            <div class="app-card">
+                <h2>訪問者カウンター</h2>
+                <div id="display">0</div>
+                <div id="log-container">
+                    <h3>訪問ログ</h3>
+                    <ul id="log-list"></ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="todo-view" class="view">
+            <div class="app-card">
+                <div class="todo-control">
+                    <h3>新しいタスク</h3>
+                    <div class="todo-input-group">
+                        <input type="text" id="todo-input" placeholder="タスクを入力...">
+                        <button id="todo-add-btn" class="add-btn">追加</button>
+                    </div>
+                    <p class="txt-contents">これ使うんだろうか...</p>
+                </div>
+                    
+                <div class="todo-list-wrapper">
+                    <h3>Checklist</h3>
+                    <ul id="todo-list"></ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 My Website</p>
+        </div>
+    </footer>
+    <script src="main.js"></script>
+</body>
+</html>

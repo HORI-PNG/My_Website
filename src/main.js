@@ -116,7 +116,7 @@ function renderTodos() {
         const li = document.createElement('li');
         li.innerHTML = `
             <div>
-                <input type="checkbox" id=check-${todo.id}">
+                <input type="checkbox" id="check-${todo.id}">
                 <span>${todo.text}</span>
             </div>
             <button class="delete-btn" onclick="deleteTodo(${todo.id})">削除</button>
@@ -145,7 +145,13 @@ function switchView(viewName) {
     activeView.classList.add('active');
     // タイトルを変える
     const title = document.getElementById('view-title');
-    title.innerText = viewName === 'counter' ? 'Counter App' : 'ToDo List App';
+    if (viewName === 'counter') {
+        title.innerText = 'Counter App';
+    } else if (viewName === 'todo') {
+        title.innerText = 'ToDo List App';
+    } else if (viewName === 'top') {
+        title.innerText = '2026年!残り一年を謳歌しよう!';
+    }
     // サイドメニューが開いていたら閉じる
     sideMenu.classList.remove('active');
 }
