@@ -1,16 +1,20 @@
-import { addLog } from './logger.js';
-
-let count = Number(localStorage.getItem('savedCount')) || 0;
 const today = new Date();
 
-export function updateDisplay(date) {
-    const display = document.getElementById('display');
-    if (!display) return;
-    
-    display.innerText = date - today;
-    display.style.color = count === 0 ? 'black' : (count > 0 ? 'blue' : 'red');
+// 他のファイルで使えるようにexportをつけてる
+export function updateDisplay(elementId, targetDate) {
+    const el = document.getElementById(elementId);
+    if (!el) return;
+
+    const diffTime = targetDate - today;
+    const diffDays = Math.ceil(diffTIme / (1000 * 60 * 60 * 24));
+
+    if (diffDays >= 0) {
+        el.innerText = `残り${diffDays}日！`
+    }
+    el.style.color = diffDays >= 0 ? "blue" : "red";
 }
 
-function saveCount() {
-    localStorage.setItem('savedCount', count);
+export function innerCounter() {
+    updateDisplay(`display-1`, new Date('2026-12-31')); // 2026年
+    updateDisplay(`display-1`, new Date('2027-03-31')); // 大学最終日
 }
