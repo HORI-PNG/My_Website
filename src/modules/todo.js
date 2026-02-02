@@ -1,4 +1,3 @@
-import { addLog } from './logger.js';
 import { updateDisplay } from './counter.js'; // カウンター値が必要な場合
 
 let todos = JSON.parse(localStorage.getItem('savedTodos')) || [];
@@ -18,7 +17,6 @@ export function initTodo() {
         
         // カウンターの現在の値を取得してログを出す
         const currentCount = Number(localStorage.getItem('savedCount'));
-        addLog(`ToDo追加: ${newTodo.text}`, currentCount);
     });
 
     // HTMLのonclickから呼べるようにする
