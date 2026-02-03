@@ -3,7 +3,6 @@ body {
     margin: 0;
     font-family: "Hiragino Kaku Gothic ProN", sans-serif;
     background-color: #f0f2f5;
-    overflow: hidden; /* 全体スクロールを抑止し、メインエリアだけスクロールさせる */
 }
 
 .container { 
@@ -19,7 +18,7 @@ body {
     border-right: 2px solid #ddd;
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 30px;
     box-shadow: 2px 0 5px rgba(0,0,0,0.05);
     z-index: 10;
 }
@@ -65,7 +64,7 @@ body {
 
 /* 分析ボタン */
 .btn-primary {
-    background: #004471;
+    background: rgb(128, 176, 207);
     color: white;
     border: none;
     padding: 15px;
@@ -76,20 +75,22 @@ body {
 }
 
 .btn-primary:hover {
-    background: #002d4b;
+    background: #1e5c85;
 }
 
 /* メインビュー (グラフエリア) */
 .main-view { 
     flex: 1; 
-    padding: 30px; 
+    padding: 20px; 
     overflow-y: auto; 
 }
 
 .chart-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /* 画面幅に合わせて自動調整 */
-    gap: 20px;
+    /* 「1fr 1fr」で、同じ幅の列を2つ作ります */
+    grid-template-columns: 1fr 1fr; 
+    gap: 20px; /* グラフ同士の隙間 */
+    padding: 10px;
 }
 
 /* グラフ容器 */
@@ -98,7 +99,6 @@ body {
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 8px;
-    min-height: 350px;
+    height: 350px; /* 高さを固定 */
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    position: relative;
 }

@@ -1,9 +1,9 @@
-from flask import Flask, render_template
 import os
+from flask import Flask, render_template
 
 def create_app():
-    # テンプレートと静的ファイルの場所を frontend フォルダに指定
-    # backend/app/ から見た相対パスで指定
+    # 1. パスの確実な解決（昔のコードのロジックを完全復元）
+    # backend/app/ から見た相対パスで frontend フォルダを指し示す
     base_dir = os.path.abspath(os.path.dirname(__file__))
     frontend_dir = os.path.join(base_dir, '../../frontend')
     
@@ -11,11 +11,13 @@ def create_app():
                 template_folder=os.path.join(frontend_dir, 'templates'),
                 static_folder=os.path.join(frontend_dir, 'static'))
 
-    # APIブループリントの登録
+    # 2. Blueprintの登録（関数名を api_bp に統一）
     from app.api.analyze_api import api_bp
-    app.register_blueprint(api_bp)
+    # JS側の '/analyze/upload' と合わせるため prefix を指定
+    app.register_blueprint(api_bp, url_prefix='/analyze')
 
-    # ルート定義
+    # 3. ルート定義（昔のコードから端折らずに復元）
+    # これがないと http://127.0.0.1:5000/ にアクセスしても表示されません
     @app.route('/')
     def home():
         return render_template('home.html')
