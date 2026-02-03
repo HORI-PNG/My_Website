@@ -5,7 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const api = new ApiClient();
     const visualizer = new DataVisualizer();
     
-    const uploadBtn = document.querySelector('.btn-primary'); // index.htmlの「出力ボタン」
+    // index.html の「出力ボタン」
+    const uploadBtn = document.querySelector('.btn-primary');
     const fileInput = document.getElementById('select_file');
 
     if (uploadBtn && fileInput) {
@@ -20,17 +21,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 uploadBtn.disabled = true;
                 uploadBtn.innerText = '分析中...';
 
-                // エンドポイントを的確に指定
-                const result = await api.uploadFile('/api/analyze/upload', file);
+                // APIエンドポイントを指定
+                const result = await api.uploadFile('/analyze/upload', file);
                 
                 if (result.status === 'success') {
-                    // サイドバーの表示更新（index.htmlのIDに基づき）
-                    document.getElementById('display-file_name').textContent = result.filename;
+                    // サイドバーの統計情報を更新
+                    document.getElementById('display-file_name').textContent = result.file_name;
                     document.getElementById('display_students_total').textContent = result.students_total;
                     document.getElementById('display_parents_total').textContent = result.parents_total;
                     document.getElementById('display_satisfaction').textContent = result.satisfaction.toFixed(2);
 
-                    // もともとのきれいなグラフ描画ロジックを呼び出す
+                    // もともとのきれいなグラフ描画ロジックへ流し込む
                     visualizer.updateDashboard(result);
                     
                     alert('分析が完了しました！');
