@@ -1,36 +1,33 @@
-from flask import Blueprint, request, jsonify
-from app.services.data_service import SurveyAnalyzer
+from flask import Blueprint, jsonify, request
+import pandas as pd
+from ..services.data_service import DataService
 
-# 'api' という名前でブループリントを作成
-api_bp = Blueprint('api', __name__)
+# backend/app/__init__.py でのインポート名に合わせて api_bp とします
+api_bp = Blueprint('analyze', __name__)
 
 @api_bp.route('/upload', methods=['POST'])
 def upload_file():
-    """ファイルを受け取り、分析結果をJSONで返す"""
-    
-    # 1. ファイルの存在チェック
     if 'file' not in request.files:
-        return jsonify({'status': 'error', 'error': 'ファイルが送信されていません'}), 400
+        return jsonify({'error': 'ファイルが見つかりません'}), 400
     
     file = request.files['file']
-    if file.filename == '':
-        return jsonify({'status': 'error', 'error': 'ファイルが選択されていません'}), 400
-
+    filename = file.filename
+    if filename == '':
+        return jsonify({'error': 'No selected file'}), 400
+    
     try:
-        # 2. サービス層（クラス）を使って分析実行
-        analyzer = SurveyAnalyzer()
-        result_data = analyzer.analyze(file, file.filename)
+        if filename.endswith('.csv'):
+            df = pd.read_csv(file)
+        elif filename.endswith(('.xls', '.xlsx')):
+            df = pd.read_excel(file, sheet_name='フォームの回答 1')
+        else:
+            return jsonify({'error': 'ファイル形式が違います。'}), 400
         
-        # 3. 結果をFrontendに返す
-        return jsonify({
-            'status': 'success',
-            **result_data # 辞書を展開して結合 (file_name, students_total等が含まれる)
-        })
-
-    except ValueError as e:
-        # ユーザー起因のエラー（ファイル形式違いなど）
-        return jsonify({'status': 'error', 'error': str(e)}), 400
+        # DataServiceから全結果を取得
+        results = DataService.analyze_survey_data(df)
+        results['filename'] = filename
+        
+        return jsonify(results)
+        
     except Exception as e:
-        # 予期せぬサーバーエラー
-        print(f"Server Error: {e}") # ログに出力
-        return jsonify({'status': 'error', 'error': 'サーバー内部でエラーが発生しました'}), 500
+        return jsonify({'error': str(e)}), 500

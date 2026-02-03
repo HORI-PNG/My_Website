@@ -1,0 +1,104 @@
+/* 基本設定 */
+body {
+    margin: 0;
+    font-family: "Hiragino Kaku Gothic ProN", sans-serif;
+    background-color: #f0f2f5;
+    overflow: hidden; /* 全体スクロールを抑止し、メインエリアだけスクロールさせる */
+}
+
+.container { 
+    display: flex; 
+    height: 100vh; 
+}
+
+/* サイドバー */
+.sidebar {
+    width: 280px;
+    background: white;
+    padding: 20px;
+    border-right: 2px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+    z-index: 10;
+}
+
+.sidebar h1 {
+    font-size: 20px;
+    color: #004471;
+    margin: 0;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #004471;
+}
+
+.input-section label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.input-section input { 
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.display-section { 
+    font-size: 15px;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+.display-section p {
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.display-section span {
+    color: #004471;
+    float: right;
+}
+
+/* 分析ボタン */
+.btn-primary {
+    background: #004471;
+    color: white;
+    border: none;
+    padding: 15px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+.btn-primary:hover {
+    background: #002d4b;
+}
+
+/* メインビュー (グラフエリア) */
+.main-view { 
+    flex: 1; 
+    padding: 30px; 
+    overflow-y: auto; 
+}
+
+.chart-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /* 画面幅に合わせて自動調整 */
+    gap: 20px;
+}
+
+/* グラフ容器 */
+.chart-container {
+    background: white;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    min-height: 350px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    position: relative;
+}

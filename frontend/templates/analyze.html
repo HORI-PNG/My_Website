@@ -2,41 +2,41 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Analyze App</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/analyze.css') }}">
+    <title>データ集計ツール</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>説明会アンケート分析</h1>
-        </header>
-
-        <main>
-            <section class="upload-section">
+        <aside class="sidebar">
+            <h1>分析パネル</h1>
+            <div class="input-section">
+                <label>ファイル参照</label>
                 <input type="file" id="select_file" accept=".csv, .xlsx">
-                <button id="upload-btn">分析開始</button>
-            </section>
+            </div>
 
-            <section class="dashboard">
-                <div class="info-panel">
-                    <p>ファイル名: <span id="display-file_name">未選択</span></p>
-                    <p>平均満足度: <span id="display-satisfaction">-</span></p>
-                </div>
+            <div class="display-section">
+                <p>ファイル名：<span id="display-file_name">未選択</span></p>
+                <p>新入生：<span id="display_students_total">0</span>人</p>
+                <p>保護者：<span id="display_parents_total">0</span>人</p>
+                <p>満足度：<span id="display_satisfaction">0</span></p>
+            </div>
 
-                <div class="chart-container">
-                    <canvas id="chart1"></canvas>
-                </div>
-            </section>
+            <button class="btn-primary" id="upload-btn">分析開始</button>
+            
+            <div style="margin-top: auto;">
+                <a href="{{ url_for('home') }}" style="text-decoration:none; color:#666;">← 戻る</a>
+            </div>
+        </aside>
+
+        <main class="main-view">
+            <div class="chart-grid">
+                <div class="chart-container"><canvas id="chart1"></canvas></div>
+                <div class="chart-container"><canvas id="chart2"></canvas></div>
+            </div>
         </main>
-
-        <footer>
-            <a href="{{ url_for('home') }}">← ポートフォリオに戻る</a>
-        </footer>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
     <script type="module" src="{{ url_for('static', filename='js/analyze.js') }}"></script>
 </body>
 </html>

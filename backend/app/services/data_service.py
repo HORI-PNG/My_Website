@@ -1,53 +1,80 @@
 import pandas as pd
-import os
+import numpy as np
 
-class SurveyAnalyzer:
-    """アンケートデータを分析するクラス"""
-    
-    def __init__(self):
-        # カラム名の定義（CSVのヘッダーに合わせて調整してください）
-        self.COL_USER_TYPE = '0' # 例: 参加者種別 ('新入生ご本人様' など)
-        self.COL_SATISFACTION = '本日の説明会の満足度を教えてください'
-
-    def load_data(self, file_stream, filename):
-        """ファイルを読み込んでDataFrameを返す"""
-        try:
-            if filename.endswith('.csv'):
-                return pd.read_csv(file_stream)
-            elif filename.endswith(('.xls', '.xlsx')):
-                return pd.read_excel(file_stream)
-            else:
-                raise ValueError("未対応のファイル形式です")
-        except Exception as e:
-            raise ValueError(f"ファイルの読み込みに失敗しました: {str(e)}")
-
-    def analyze(self, file_stream, filename):
-        """メインの分析処理"""
-        df = self.load_data(file_stream, filename)
+class DataService:
+    @staticmethod
+    def analyze_survey_data(df):
+        # --- sample_api.py のロジック・変数名・計算式を完全に再現 ---
         
-        # 必要なデータを計算
-        result = {
-            'file_name': filename,
-            'students_total': self._count_by_type(df, '新入生ご本人様'),
-            'parents_total': self._count_by_type(df, '保護者様'),
-            'satisfaction': self._calculate_mean_satisfaction(df)
-        }
-        return result
+        # 1. 基本設定
+        time_labels = ['短い', 'ちょうど良い', '長い']
+        good_point_labels = [
+            '大学生協のご説明',
+            '九工大生の一日（通学編）', 
+            '九工大生の一日（講義編）',
+            '九工大生の一日（昼食編）',
+            '九工大生の一日（学外編）',
+            '九工大での4年間',
+        ]
 
-    def _count_by_type(self, df, user_type):
-        """指定された種別の人数をカウント"""
-        if self.COL_USER_TYPE not in df.columns:
-            return 0
-        return int((df[self.COL_USER_TYPE] == user_type).sum())
+        # 型変換と属性分け
+        df['本日の説明会の満足度を教えてください'] = pd.to_numeric(df['本日の説明会の満足度を教えてください'], errors='coerce')
+        students_df = df[df['0'] == '新入生ご本人様']
+        parents_df = df[df['0'] == '保護者様']
 
-    def _calculate_mean_satisfaction(self, df):
-        """満足度の平均を計算"""
-        if self.COL_SATISFACTION not in df.columns:
-            return 0.0
+        # 2. 時間の集計関数（パーセント化）
+        def time_get_counts(target_df):
+            series = target_df['説明時間はいかがでしたか。'].dropna()
+            total = len(series)
+            if total == 0: return [0] * len(time_labels)
+            counts = series.value_counts().to_dict()
+            return [int((counts.get(label, 0) / total) * 100) for label in time_labels]
+
+        # 3. よかった点の集計関数（パーセント化 / カンマ区切り対応）
+        def good_point_get_counts(target_df):
+            col_name = 'よかった、ためになった説明を教えてください'
+            total_people = len(target_df)
+            if total_people == 0 or col_name not in target_df.columns:
+                return [0] * len(good_point_labels)
             
-        # 数値に変換（変換できない文字はNaNにする）
-        numeric_series = pd.to_numeric(df[self.COL_SATISFACTION], errors='coerce')
-        val = numeric_series.mean()
-        
-        # NaN（計算不能）の場合は0を返す
-        return float(val) if pd.notna(val) else 0.0
+            series = target_df[col_name].dropna().astype(str)
+            all_answers = series.str.split(r',\s*').explode()
+            counts = all_answers.str.strip().value_counts().to_dict()
+            return [int((counts.get(label, 0) / total_people) * 100) for label in good_point_labels]
+
+        # 4. よかった点・居住形態別
+        def good_point_get_counts_by_living_status(target_df, target_status):
+            col_name_point = 'よかった、ためになった説明を教えてください'
+            col_name_living = '一人暮らし予定か実家通学予定かお答えください'
+            if col_name_point not in target_df.columns or col_name_living not in target_df.columns:
+                return [0] * len(good_point_labels)
+
+            subset = target_df[target_df[col_name_living] == target_status]
+            total_people = len(subset)
+            if total_people == 0: return [0] * len(good_point_labels)
+
+            series = subset[col_name_point].dropna().astype(str)
+            all_answers = series.str.split(r',\s*').explode()
+            counts = all_answers.str.strip().value_counts().to_dict()
+            return [int((counts.get(label, 0) / total_people) * 100) for label in good_point_labels]
+
+        # 結果の構築（sample_api.py と 100% 同一のキー）
+        return {
+            'status': 'success',
+            'time_labels': time_labels,
+            'time_data_all': time_get_counts(df),
+            'time_data_students': time_get_counts(students_df),
+            'time_data_parents': time_get_counts(parents_df),
+            'good_point_labels': good_point_labels,
+            'good_point_data_all': good_point_get_counts(df),
+            'good_point_data_students': good_point_get_counts(students_df),
+            'good_point_data_parents': good_point_get_counts(parents_df),
+            'good_point_data_living_alone': good_point_get_counts_by_living_status(df, '一人暮らし予定'),
+            'good_point_data_living_home': good_point_get_counts_by_living_status(df, '実家通学予定'),
+            'students_total': int((df['0'] == '新入生ご本人様').sum()),
+            'parents_total': int((df['0'] == '保護者様').sum()),
+            'satisfaction': float(df['本日の説明会の満足度を教えてください'].mean()) if not df.empty else 0.0,
+            'satisfaction_students': float(students_df['本日の説明会の満足度を教えてください'].mean()) if not students_df.empty else 0.0,
+            'satisfaction_parents': float(parents_df['本日の説明会の満足度を教えてください'].mean()) if not parents_df.empty else 0.0,
+            'data_sum': 8 # 元コードの定数
+        }
