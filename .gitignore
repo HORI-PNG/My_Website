@@ -1,0 +1,19 @@
+# Pythonのコンパイル済みファイル
+__pycache__/
+*.py[cod]
+
+# 仮想環境フォルダ (これを含めないのが鉄則！)
+venv/
+env/
+
+# 環境変数や秘密鍵 (セキュリティのため必須)
+.env
+instance/
+
+# データファイル (個人情報を含む可能性があるCSVなどを除外する場合)
+backend/data/*.csv
+backend/data/*.xlsx
+
+# OS生成ファイル
+.DS_Store
+Thumbs.db
