@@ -9,6 +9,10 @@ class DataService:
         # 属性ごとのカウント
         students_total = (df['0'] == '新入生ご本人様').sum()
         parents_total = (df['0'] == '保護者様').sum()
+        students_total_living_alone = ((df['一人暮らし予定か実家通学予定かお答えください'] == '一人暮らし予定') & (df['0'] == '新入生ご本人様')).sum()
+        students_total_living_home = ((df['一人暮らし予定か実家通学予定かお答えください'] == '実家通学予定') & (df['0'] == '新入生ご本人様')).sum()
+        parents_total_living_alone = ((df['一人暮らし予定か実家通学予定かお答えください'] == '一人暮らし予定') & (df['0'] == '保護者様')).sum()
+        parents_total_living_home = ((df['一人暮らし予定か実家通学予定かお答えください'] == '実家通学予定') & (df['0'] == '保護者様')).sum()
         
         # 満足度の計算
         satisfaction = df['本日の説明会の満足度を教えてください'].mean()
@@ -92,6 +96,10 @@ class DataService:
             'good_point_data_living_home': good_point_get_counts_by_living_status(df, '実家通学予定'),
             'students_total': int(students_total),
             'parents_total': int(parents_total),
+            'students_total_living_alone': int(students_total_living_alone),
+            'students_total_living_home': int(students_total_living_home),
+            'parents_total_living_alone': int(parents_total_living_alone),
+            'parents_total_living_home': int(parents_total_living_home),
             'satisfaction': float(satisfaction) if pd.notna(satisfaction) else 0.0,
             'satisfaction_students': float(satisfaction_students) if pd.notna(satisfaction_students) else 0.0,
             'satisfaction_parents': float(satisfaction_parents) if pd.notna(satisfaction_parents) else 0.0,
