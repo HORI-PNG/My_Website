@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JavaScript Counter</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
 </head>
 <body>
     <header>
@@ -30,7 +30,7 @@
             <li><a href="javascript:void(0)" onclick="switchView('top')">Top Page</a></li>
             <li><a href="javascript:void(0)" onclick="switchView('counter')">Counter</a></li>
             <li><a href="javascript:void(0)" onclick="switchView('todo')">ToDo List</a></li>
-            <li><a href="http://127.0.0.1:5000/" target="_blank">Hack</a></li>
+            <li><a href="http://127.0.0.1:5000/analyze" target="_blank">Hack</a></li>
         </ul>
     </div>
 
@@ -56,7 +56,7 @@
                         <h2>作ったアプリ一覧</h2>
                     </div>
                     <p>「Counter App」「ToDo List」「Home」を作りました。
-                        Counterは、ページがロードされると増えるのですが、意味はあるんでしょうか？一年残り〇〇日とかの方がいいのでは？と思います。
+                        Counterは、ページがロードされると増えるのですが、意味はあるんでしょうか？一年残り〇〇日とかの方がいいのでは？と思います。（修正済み）
                         ToDo Listは、タスクを追加・削除ができます。カレンダーアプリでよくないでしょうか？〇〇を何分したとかの管理の方がいいのでは？と思います。
                         Home画面は、この画面です。これいるんでしょうか？
                     </p>
@@ -70,7 +70,7 @@
                     <div class="menu-item item-counter" onclick="switchView('counter')">
                         <span class="fa fa-calculator"></span>
                         <h3>Counter</h3>
-                        <p>訪問回数をカウントします</p>
+                        <p>大事な日まで残り〇〇日</p>
                     </div>
                     <div class="menu-item item-todo" onclick="switchView('todo')">
                         <span class="fa fa-check-square-o"></span>
@@ -146,6 +146,31 @@
                             <h3>Perplexity</h3>
                             <p>高速Web検索</p>
                         </div>
+                        <div class="menu-item Google-AI-Studio" onclick="window.open('https://aistudio.google.com/prompts/new_chat?pli=1','_blank')">
+                            <span class="Google-Ai-Studio"></span>
+                            <h3>Google-AI-Studio</h3>
+                            <p>Geminiより無料で強い</p>
+                        </div>
+                        <div class="menu-item Grok" onclick="window.open('https://grok.com/','_blank')">
+                            <span class="Grok"></span>
+                            <h3>Grok</h3>
+                            <p>X検索ならこれ</p>
+                        </div>
+                        <div class="menu-item Whisk" onclick="window.open('https://labs.google/fx/ja/tools/whisk','_blank')">
+                            <span class="Whisk"></span>
+                            <h3>Whisk</h3>
+                            <p>大量の画像生成🍌</p>
+                        </div>
+                        <div class="menu-item Genspark" onclick="window.open('https://www.genspark.ai/','_blank')">
+                            <span class="Genspark"></span>
+                            <h3>Genspark</h3>
+                            <p>スライド作成・画像生成</p>
+                        </div>
+                        <div class="menu-item Tenbin-AI" onclick="window.open('https://tenbin.ai/workspace','_blank')">
+                            <span class="Tenbin-AI"></span>
+                            <h3>Tenbin-AI</h3>
+                            <p>複数のGPTを一括比較</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -189,7 +214,7 @@
     <footer>
         <div class="container">
             <p>&copy; 2026 My Website<br>
-                最終作成日：2026/01/07<br>
+                最終作成日：2026/02/03<br>
                 HoriYu
             </p>
         </div>

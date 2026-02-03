@@ -323,6 +323,26 @@ header {
     background-image: url('../img/perplexity.png'); 
 }
 
+.Google-AI-Studio::before {
+    background-image: url('../img/Google_AI_Studio.png'); 
+}
+
+.Grok::before {
+    background-image: url('../img/Grok.png'); 
+}
+
+.Whisk::before {
+    background-image: url('../img/Whisk.png'); 
+}
+
+.Genspark::before {
+    background-image: url('../img/Genspark.png'); 
+}
+
+.Tenbin-AI::before {
+    background-image: url('../img/Tenbin-AI.png'); 
+}
+
 .menu-item:hover {
     transform: translateY(-3px); /* 少し上に浮き上がらせる */
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
